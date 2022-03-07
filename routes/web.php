@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\LogoutController;
-use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\AuthV2\LoginControllerV2;
+use App\Http\Controllers\AuthV2\LogoutControllerV2;
+use App\Http\Controllers\AuthV2\RegisterControllerV2;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,29 +22,23 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-/**
- * Home Routes
- */
+
 Route::get('/', [HomeController::class,'index'])->name('home.index');
 
 Route::group(['middleware' => ['guest']], function() {
-    /**
-     * Register Routes
-     */
-    Route::get('/register', [RegisterController::class,'show'])->name('register.show');
-    Route::post('/register', [RegisterController::class,'register'])->name('register.perform');
 
-    /**
-     * Login Routes
-     */
-    Route::get('/login', [LoginController::class,'show'])->name('login.show');
-    Route::post('/login', [LoginController::class,'login'])->name('login.perform');
+    Route::get('/register', [RegisterControllerV2::class,'show'])->name('register.show');
+    Route::post('/register', [RegisterControllerV2::class,'register'])->name('register.perform');
 
+    Route::get('/login', [LoginControllerV2::class,'show'])->name('login');
+    Route::post('/login', [LoginControllerV2::class,'login'])->name('login.perform');
 });
 
 Route::group(['middleware' => ['auth']], function() {
-    /**
-     * Logout Routes
-     */
-    Route::get('/logout', [LogoutController::class,'perform'])->name('logout.perform');
+    
+    Route::post('/register_from_dash', [RegisterControllerV2::class, 'registerFromdash'])->name('register_from_dash.perform');
+
+    Route::get('/logout', [LogoutControllerV2::class,'perform'])->name('logout.perform');
+
+    Route::get('/user', [UserController::class,'index'])->name('user.index');
 });
