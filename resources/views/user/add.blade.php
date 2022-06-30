@@ -1,6 +1,7 @@
 <div class="modal fade" id="modal-xl">
     <div class="modal-dialog modal-lg">
         <div class="modal-content card card-primary card-outline">
+
             <form name="dForm" action="{{ route('register_from_dash.perform') }}" method="post">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                 <div class="modal-header">
@@ -12,19 +13,15 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="name">Name</label>
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Jhon" required="required" onchange="validate()">
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Name" required>
                     </div>
                     <div class="form-group">
-                        <label for="email">Email address</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="example@gmail.com" required="required" onchange="validate()">
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="1~8 Character" required="required" onchange="validate()">
-                    </div>
-                    <div class="form-group">
-                        <label for="password_confirmation">Confirm Password</label>
-                        <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="1~8 Character" required="required" onchange="validate()">
+                        <label for="id_type" class="form-label">Type</label>
+                        <select name="id_type" class="form-control" aria-label="Default select example" required>
+                            <option disabled selected value="">Select Type</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                        </select>
                     </div>
                 </div>
                 <div class="modal-footer justify-content-between bg-grey">
